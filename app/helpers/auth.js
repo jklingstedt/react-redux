@@ -1,20 +1,23 @@
+import { ref, firebaseAuth } from 'config/constants'
+import firebase from 'firebase'
+
 export default function auth () {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve({
-        name: 'Jason Klingstedt',
-        avatar: 'https://pbs.twimg.com/profile_images/257653764/twitter_bigger.jpg',
-        uid: 'jklingstedt',
-      })
-    }, 2000)
-  })
+  return firebaseAuth().signInWithPopup(
+    new firebase.auth.FacebookAuthProvider()
+  )
 }
 
 export function checkIfAuthed (store) {
   // ignore firebase
-  return store.getState().isAuthed
+  return store.getState().isAuthed === true
 }
 
 export function logout () {
-  console.log('logged out')
+  return firebaseAuth().signOut()
+}
+
+export function saveUser (user) {
+  return ref.child(`users/${user.uid}`)
+    .set(user)
+    .then(() => user)
 }
