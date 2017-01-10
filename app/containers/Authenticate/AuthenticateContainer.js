@@ -27,8 +27,8 @@ class AuthenticateContainer extends Component {
 
 function mapStateToProps (state) {
   return {
-    isFetching: state.isFetching,
-    error: state.error,
+    isFetching: state.users.isFetching,
+    error: state.users.error,
   }
 }
 
