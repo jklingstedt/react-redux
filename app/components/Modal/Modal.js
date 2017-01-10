@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import { default as ReactModal } from 'react-modal'
+import { formatDuck } from 'helpers/utils'
 import {
   newDuckTop, pointer, newDuckInputContainer,
   newDuckInput, submitDuckBtn, darkBtn } from './styles.css'
@@ -17,8 +18,7 @@ const modalStyles = {
 
 const Modal = (props) => {
   const submitDuck = () => {
-    console.log(props.duckText)
-    console.log(props.user)
+    props.duckFanOut(formatDuck(props.duckText, props.user))
   }
   return (
     <span className={darkBtn} onClick={props.openModal}>
@@ -58,6 +58,7 @@ Modal.PropTypes = {
   openModal: func.isRequired,
   closeModal: func.isRequired,
   updateDuckText: func.isRequired,
+  duckFanOut: func.isRequired,
 }
 
 export default Modal
