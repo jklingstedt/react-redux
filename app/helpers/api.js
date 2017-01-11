@@ -30,4 +30,14 @@ const saveDuck = (duck) => {
   ]).then(() => ({...duck, duckId}))
 }
 
-export { saveToDucks, saveToUsersDucks, saveLikeCount, saveDuck }
+const listenToFeed = (cb, errorCB) => {
+  ref.child('ducks').on('value', (snapshot) => {
+    const feed = snapshot.val() || {}
+    const sortedIds = Object.keys(feed).sort((a, b) => {
+      return feed[b].timestamp - feed[a].timestamp
+    })
+    cb({feed, sortedIds})
+  }, errorCB())
+}
+
+export { saveToDucks, saveToUsersDucks, saveLikeCount, saveDuck, listenToFeed }
