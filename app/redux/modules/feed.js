@@ -2,7 +2,6 @@ import { addListener } from 'redux/modules/listeners'
 import { addMultipleDucks } from 'redux/modules/ducks'
 import { listenToFeed } from 'helpers/api'
 
-
 const SETTING_FEED_LISTENER = 'SETTING_FEED_LISTENER'
 const SETTING_FEED_LISTENER_ERROR = 'SETTING_FEED_LISTENER_ERROR'
 const SETTING_FEED_LISTENER_SUCCESS = 'SETTING_FEED_LISTENER_SUCCESS'
