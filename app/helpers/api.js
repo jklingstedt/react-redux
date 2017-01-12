@@ -22,7 +22,7 @@ export const saveLikeCount = (duckId) => {
 }
 
 export const saveDuck = (duck) => {
-  const { duckId, duckPromise } = saveToDucks()
+  const { duckId, duckPromise } = saveToDucks(duck)
   return Promise.all([
     duckPromise,
     saveToUsersDucks(duck, duckId),

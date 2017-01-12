@@ -44,7 +44,7 @@ function fetchingLikesSuccess (likes) {
   }
 }
 
-const addAndHandleLike = (duckId, e) => {
+export const addAndHandleLike = (duckId, e) => {
   e.stopPropagation()
   return (dispatch, getState) => {
     dispatch(addLike(duckId))
@@ -61,7 +61,7 @@ const addAndHandleLike = (duckId, e) => {
   }
 }
 
-const handleDeleteLike = (duckId, e) => {
+export const handleDeleteLike = (duckId, e) => {
   e.stopPropagation()
   return (dispatch, getState) => {
     dispatch(removeLike(duckId))
