@@ -20,7 +20,7 @@ class FeedContainer extends Component {
   }
 }
 
-FeedContainer.PropTypes = {
+FeedContainer.propTypes = {
   newDucksAvailable: PropTypes.bool.isRequired,
   error: PropTypes.string.isRequired,
   isFetching: PropTypes.bool.isRequired,

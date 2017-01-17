@@ -25,13 +25,13 @@ class DuckContainer extends Component {
 
 const { func, object, bool, number } = PropTypes
 
-DuckContainer.PropTypes = {
+DuckContainer.propTypes = {
   duck: object.isRequired,
   numberOfLikes: number,
   isLiked: bool.isRequired,
   hideReplyBtn: bool.isRequired,
   handleDeleteLike: func.isRequired,
-  addHandleLike: func.isRequired,
+  addAndHandleLike: func.isRequired,
 }
 
 DuckContainer.defaultProps = {

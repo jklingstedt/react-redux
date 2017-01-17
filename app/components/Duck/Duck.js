@@ -10,7 +10,6 @@ import {
 const Duck = (props) => {
   const starIcon = props.isLiked === true ? likedIcon : icon
   const starFn = props.isLiked === true ? props.handleDeleteLike : props.addAndHandleLike
-  // console.log(props)
   return (
     <div
       className={duckContainer}
@@ -37,7 +36,7 @@ const Duck = (props) => {
   )
 }
 
-Duck.PropTypes = {
+Duck.propTypes = {
   duck: PropTypes.shape({
     avatar: PropTypes.string.isRequired,
     duckId: PropTypes.string.isRequired,

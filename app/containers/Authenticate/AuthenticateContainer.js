@@ -36,7 +36,7 @@ function mapDispatchToProps (dispatch) {
   return bindActionCreators(userActionCreators, dispatch)
 }
 
-AuthenticateContainer.PropTypes = {
+AuthenticateContainer.propTypes = {
   isFetching: PropTypes.bool.isRequired,
   error: PropTypes.string.isRequired,
   fetchAndHandleAuthedUser: PropTypes.func.isRequired,

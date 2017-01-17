@@ -40,7 +40,7 @@ export const listenToFeed = (cb, errorCB) => {
   }, errorCB())
 }
 
-export const fetchUserLikes = (uid) => {
+export const fetchUsersLikes = (uid) => {
   return ref.child(`usersLikes/${uid}`).once('value')
     .then((snapshot) => snapshot.val() || {})
 }
@@ -61,4 +61,14 @@ export const incrementNumberOfLikes = (duckId) => {
 export const decrementNumberOfLikes = (duckId) => {
   return ref.child(`likeCount/${duckId}`)
     .transaction((currentValue = 0) => currentValue - 1)
+}
+
+export const fetchUser = (uid) => {
+  return ref.child(`users/${uid}`).once('value')
+    .then((snapshot) => snapshot.val())
+}
+
+export const fetchUsersDucks = (uid) => {
+  return ref.child(`usersDucks/${uid}`).once('value')
+    .then((snapshot) => snapshot.val() || {})
 }

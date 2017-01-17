@@ -14,7 +14,7 @@ class LogoutContainer extends Component {
   }
 }
 
-LogoutContainer.PropTypes = {
+LogoutContainer.propTypes = {
   dispatch: PropTypes.func.isRequired,
 }
 

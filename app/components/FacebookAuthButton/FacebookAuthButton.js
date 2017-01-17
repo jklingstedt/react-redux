@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { button } from './styles.css'
 
-FacebookAuthButton.PropTypes = {
+FacebookAuthButton.propTypes = {
   onAuth: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
 }
