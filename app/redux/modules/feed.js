@@ -1,6 +1,6 @@
 import { addListener } from 'redux/modules/listeners'
-import { addMultipleDucks } from 'redux/modules/ducks'
 import { listenToFeed } from 'helpers/api'
+import { addMultipleDucks } from 'redux/modules/ducks'
 
 const SETTING_FEED_LISTENER = 'SETTING_FEED_LISTENER'
 const SETTING_FEED_LISTENER_ERROR = 'SETTING_FEED_LISTENER_ERROR'
@@ -52,7 +52,6 @@ export function setAndHandleFeedListener () {
 
     dispatch(addListener('feed'))
     dispatch(settingFeedListener())
-
     listenToFeed(({feed, sortedIds}) => {
       dispatch(addMultipleDucks(feed))
       initialFetch === true

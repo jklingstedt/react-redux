@@ -38,22 +38,6 @@ export function addSingleUsersDuck (uid, duckId) {
   }
 }
 
-export const fetchAndHandleUsersDucks = (uid) => {
-  return (dispatch) => {
-    dispatch(fetchingUsersDucks())
-    fetchUsersDucks(uid)
-      .then((ducks) => dispatch(addMultipleDucks(ducks)))
-      .then(({ducks}) => dispatch(
-        fetchingUsersDucksSuccess(
-          uid,
-          Object.keys(ducks).sort((a, b) => ducks[b].timestamp - ducks[a].timestamp),
-          Date.now()
-        )
-      ))
-      .catch((error) => fetchingUsersDucksError(error))
-  }
-}
-
 const initialUsersDuckState = {
   lastUpdated: 0,
   duckIds: [],
@@ -68,6 +52,23 @@ function usersDuck (state = initialUsersDuckState, action) {
       }
     default :
       return state
+  }
+}
+
+export function fetchAndHandleUsersDucks (uid) {
+  return function (dispatch, getState) {
+    dispatch(fetchingUsersDucks())
+
+    fetchUsersDucks(uid)
+      .then((ducks) => dispatch(addMultipleDucks(ducks)))
+      .then(({ducks}) => dispatch(
+        fetchingUsersDucksSuccess(
+          uid,
+          Object.keys(ducks).sort((a, b) => ducks[b].timestamp - ducks[a].timestamp),
+          Date.now())
+        )
+      )
+      .catch((error) => dispatch(fetchingUsersDucksError(error)))
   }
 }
 

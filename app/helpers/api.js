@@ -72,3 +72,24 @@ export const fetchUsersDucks = (uid) => {
   return ref.child(`usersDucks/${uid}`).once('value')
     .then((snapshot) => snapshot.val() || {})
 }
+
+export const fetchDuck = (duckId) => {
+  return ref.child(`ducks/${duckId}`).once('value')
+    .then((snapshot) => snapshot.val())
+}
+
+export const fetchLikeCount = (duckId) => {
+  return ref.child(`likeCount/${duckId}`).once('value')
+    .then((snapshot) => snapshot.val() || 0)
+}
+
+export const postReply = (duckId, reply) => {
+  const replyId = ref.child(`replies/${duckId}`).push().key
+  const replyWithId = {...reply, replyId}
+  const replyPromise = ref.child(`replies/${duckId}/${replyId}`).set(replyWithId)
+
+  return {
+    replyWithId,
+    replyPromise,
+  }
+}

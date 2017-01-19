@@ -1,13 +1,13 @@
 const ADD_LISTENER = 'ADD_LISTENER'
 
-export const addListener = (listenerId) => {
+export function addListener (listenerId) {
   return {
     type: ADD_LISTENER,
     listenerId,
   }
 }
 
-const listeners = (state = {}, action) => {
+export default function listeners (state = {}, action) {
   switch (action.type) {
     case ADD_LISTENER :
       return {
@@ -18,5 +18,3 @@ const listeners = (state = {}, action) => {
       return state
   }
 }
-
-export default listeners

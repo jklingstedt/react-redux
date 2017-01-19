@@ -1,55 +1,63 @@
-import { saveDuck } from 'helpers/api'
+import { saveDuck, fetchDuck } from 'helpers/api'
 import { closeModal } from './modal'
 import { addSingleUsersDuck } from './usersDucks'
 
 const FETCHING_DUCK = 'FETCHING_DUCK'
-const ADD_DUCK = 'ADD_DUCK'
-const FETCHING_DUCK_SUCCESS = 'FETCHING_DUCK_SUCCESS'
 const FETCHING_DUCK_ERROR = 'FETCHING_DUCK_ERROR'
-const REMOVE_FETCHING = 'REMOVE_FETCHING'
+const FETCHING_DUCK_SUCCESS = 'FETCHING_DUCK_SUCCESS'
+const ADD_DUCK = 'ADD_DUCK'
 const ADD_MULTIPLE_DUCKS = 'ADD_MULTIPLE_DUCKS'
+const REMOVE_FETCHING = 'REMOVE_FETCHING'
 
-export const fetchingDuck = () => {
+function fetchingDuck () {
   return {
     type: FETCHING_DUCK,
   }
 }
 
-export const fetchingDuckError = (error) => {
+function fetchingDuckError (error) {
+  console.warn(error)
   return {
     type: FETCHING_DUCK_ERROR,
-    error: error,
+    error: 'Error fetching Duck',
   }
 }
 
-export const fetchingDuckSuccess = (duck) => {
+function fetchingDuckSuccess (duck) {
   return {
     type: FETCHING_DUCK_SUCCESS,
     duck,
   }
 }
 
-export const removeFetching = () => {
+export function removeFetching () {
   return {
     type: REMOVE_FETCHING,
   }
 }
 
-export const addDuck = (duck) => {
+function addDuck (duck) {
   return {
     type: ADD_DUCK,
     duck,
   }
 }
 
-export const duckFanOut = (duck) => {
-  return (dispatch, getState) => {
+export function addMultipleDucks (ducks) {
+  return {
+    type: ADD_MULTIPLE_DUCKS,
+    ducks,
+  }
+}
+
+export function duckFanOut (duck) {
+  return function (dispatch, getState) {
     const uid = getState().users.authedId
     saveDuck(duck)
-      .then((duckWithId) => {
-        dispatch(addDuck(duckWithId))
+      .then((duckWithID) => {
+        dispatch(addDuck(duckWithID))
         dispatch(closeModal())
-        dispatch(addSingleUsersDuck(uid, duckWithId.duckId))
+        dispatch(addSingleUsersDuck(uid, duckWithID.duckId))
       })
       .catch((err) => {
         console.warn('Error in duckFanOut', err)
@@ -57,10 +65,12 @@ export const duckFanOut = (duck) => {
   }
 }
 
-export const addMultipleDucks = (ducks) => {
-  return {
-    type: ADD_MULTIPLE_DUCKS,
-    ducks,
+export function fetchAndHandleDuck (duckId) {
+  return function (dispatch, getState) {
+    dispatch(fetchingDuck())
+    fetchDuck(duckId)
+      .then((duck) => dispatch(fetchingDuckSuccess(duck)))
+      .catch((error) => dispatch(fetchingDuckError(error)))
   }
 }
 

@@ -1,4 +1,4 @@
-import auth, { saveUser, logout } from 'helpers/auth'
+import auth, { logout, saveUser } from 'helpers/auth'
 import { formatUserInfo } from 'helpers/utils'
 import { fetchUser } from 'helpers/api'
 
@@ -45,15 +45,6 @@ export function fetchingUserSuccess (uid, user, timestamp) {
   }
 }
 
-export const fetchAndHandleUser = (uid) => {
-  return (dispatch) => {
-    dispatch(fetchingUser())
-    return fetchUser(uid)
-      .then((user) => dispatch(fetchingUserSuccess(uid, user, Date.now())))
-      .catch((error) => dispatch(fetchingUserFailure(error)))
-  }
-}
-
 export function fetchAndHandleAuthedUser () {
   return function (dispatch) {
     dispatch(fetchingUser())
@@ -62,7 +53,7 @@ export function fetchAndHandleAuthedUser () {
       const userInfo = formatUserInfo(userData.displayName, userData.photoURL, user.uid)
       return dispatch(fetchingUserSuccess(user.uid, userInfo, Date.now()))
     })
-    .then((user) => saveUser(user))
+    .then(({user}) => saveUser(user))
     .then((user) => dispatch(authUser(user.uid)))
     .catch((error) => dispatch(fetchingUserFailure(error)))
   }
@@ -77,7 +68,17 @@ export function logoutAndUnauth () {
 
 export function removeFetchingUser () {
   return {
-    type: REMOVE_FETCHING_USER,
+    type: REMOVE_FETCHING_USER
+  }
+}
+
+export function fetchAndHandleUser (uid) {
+  return function (dispatch) {
+    dispatch(fetchingUser())
+
+    return fetchUser(uid)
+      .then((user) => dispatch(fetchingUserSuccess(uid, user, Date.now())))
+      .catch((error) => dispatch(fetchingUserFailure(error)))
   }
 }
 
@@ -104,7 +105,7 @@ function user (state = initialUserState, action) {
 }
 
 const initialState = {
-  isFetching: false,
+  isFetching: true,
   error: '',
   isAuthed: false,
   authedId: '',
@@ -135,6 +136,11 @@ export default function users (state = initialState, action) {
         isFetching: false,
         error: action.error,
       }
+    case REMOVE_FETCHING_USER :
+      return {
+        ...state,
+        isFetching: false,
+      }
     case FETCHING_USER_SUCCESS:
       return action.user === null
         ? {
@@ -148,11 +154,6 @@ export default function users (state = initialState, action) {
           error: '',
           [action.uid]: user(state[action.uid], action),
         }
-    case REMOVE_FETCHING_USER:
-      return {
-        ...state,
-        isFetching: false,
-      }
     default :
       return state
   }
