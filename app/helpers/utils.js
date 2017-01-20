@@ -23,7 +23,6 @@ export const formatTimeStamp = (timestamp) => {
   return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
 }
 
-
 function getMilliseconds (timestamp) {
   return new Date().getTime() - new Date(timestamp).getTime()
 }
@@ -39,7 +38,6 @@ export function staleUser (timestamp) {
 export function staleReplies (timestamp) {
   return getMilliseconds(timestamp) > repliesExpirationLength
 }
-
 
 export const formatReply = ({name, uid, avatar}, reply) => {
   return {

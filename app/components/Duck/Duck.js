@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react'
+import { Map } from 'immutable'
 import { formatTimeStamp } from 'helpers/utils'
 import MailReply from 'react-icons/lib/fa/mail-reply'
 import Star from 'react-icons/lib/fa/star'
@@ -15,19 +16,19 @@ const Duck = (props) => {
       className={duckContainer}
       style={{cursor: props.hideReplyBtn === true ? 'default' : 'pointer'}}
       onClick={props.onClick}>
-        <img src={props.duck.avatar} className={avatar}/>
+        <img src={props.duck.get('avatar')} className={avatar}/>
         <div className={contentContainer}>
           <div className={header}>
-            <div onClick={props.goToProfile} className={author}>{props.duck.name}</div>
-            <div>{formatTimeStamp(props.duck.timestamp)}</div>
+            <div onClick={props.goToProfile} className={author}>{props.duck.get('name')}</div>
+            <div>{formatTimeStamp(props.duck.get('timestamp'))}</div>
           </div>
-          <div className={text}>{props.duck.text}</div>
+          <div className={text}>{props.duck.get('text')}</div>
           <div className={likeReplyContainer}>
             {props.hideReplyBtn === true
               ? null
               : <MailReply className={icon} />}
             <div className={actionContainer}>
-              <Star className={starIcon} onClick={(e) => starFn(props.duck.duckId, e)} />
+              <Star className={starIcon} onClick={(e) => starFn(props.duck.get('duckId'), e)} />
               {props.hideLikeCount === true ? null : <div>{props.numberOfLikes}</div>}
             </div>
           </div>
@@ -37,14 +38,7 @@ const Duck = (props) => {
 }
 
 Duck.propTypes = {
-  duck: PropTypes.shape({
-    avatar: PropTypes.string.isRequired,
-    duckId: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    text: PropTypes.string.isRequired,
-    timestamp: PropTypes.number.isRequired,
-    uid: PropTypes.string.isRequired,
-  }),
+  duck: PropTypes.instanceOf(Map),
   onClick: PropTypes.func,
   isLiked: PropTypes.bool.isRequired,
   addAndHandleLike: PropTypes.func.isRequired,
