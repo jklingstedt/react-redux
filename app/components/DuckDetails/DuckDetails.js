@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react'
-import { DuckContainer } from 'containers'
+import { DuckContainer, RepliesContainer } from 'containers'
 import { formatReply } from 'helpers/utils'
 import { mainContainer, container, content, repliesContainer, replyTextAreaContainer, replyTextArea } from './styles.css'
 import { subHeader, darkBtn, errorMsg } from 'sharedStyles/styles.css'
@@ -28,6 +28,10 @@ const Reply = ({submit}) => {
   )
 }
 
+Reply.propTypes = {
+  submit: func.isRequired,
+}
+
 const DuckDetails = ({ duckId, isFetching, authedUser, error, addAndHandleReply }) => {
   return (
     <div className={mainContainer}>
@@ -39,7 +43,7 @@ const DuckDetails = ({ duckId, isFetching, authedUser, error, addAndHandleReply 
               <Reply submit={(replyText) => addAndHandleReply(duckId, formatReply(authedUser, replyText))}/>
             </div>
             <div className={repliesContainer}>
-              {'REPLY SECTION'}
+              <RepliesContainer duckId={duckId} />
             </div>
           </div>}
       {error ? <p className={errorMsg}>{error}</p> : null}

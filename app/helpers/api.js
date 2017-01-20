@@ -93,3 +93,8 @@ export const postReply = (duckId, reply) => {
     replyPromise,
   }
 }
+
+export const fetchReplies = (duckId) => {
+  return ref.child(`replies/${duckId}`).once('value')
+    .then((snapshot) => snapshot.val() || {})
+}
