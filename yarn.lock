@@ -2210,6 +2210,10 @@ ignore@^3.1.2:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-3.2.0.tgz#8d88f03c3002a0ac52114db25d2c673b0bf1e435"
 
+immutable:
+  version "3.8.1"
+  resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.8.1.tgz#200807f11ab0f72710ea485542de088075f68cd2"
+
 imurmurhash@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/imurmurhash/-/imurmurhash-0.1.4.tgz#9218b9b2b928a238b13dc4fb6b6d576f231453ea"
@@ -3399,15 +3403,15 @@ react-dom@^15.0.1:
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
 
-react-icon-base@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/react-icon-base/-/react-icon-base-1.0.0.tgz#5692d495a7cf340fcf664b8c4d4a369c56467ea5"
+react-icon-base@2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/react-icon-base/-/react-icon-base-2.0.4.tgz#b6b7662e8b009b270a4f0c213c222f5d6eca3b22"
 
-react-icons@^1.0.3:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-1.0.6.tgz#d59b5950a8ca32be8f51a490eb81fb9126ca2bff"
+react-icons@^2.2.3:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-2.2.3.tgz#3b4847923065ecb09f8ba7f7e422112de0195196"
   dependencies:
-    react-icon-base "1.0.0"
+    react-icon-base "2.0.4"
 
 react-modal@^1.6.5:
   version "1.6.5"
@@ -3433,6 +3437,10 @@ react-redux@^5.0.1:
     lodash "^4.2.0"
     lodash-es "^4.2.0"
     loose-envify "^1.1.0"
+
+react-router-redux@^4.0.7:
+  version "4.0.7"
+  resolved "https://registry.yarnpkg.com/react-router-redux/-/react-router-redux-4.0.7.tgz#9b1fde4e70106c50f47214e12bdd888cfb96e2a6"
 
 react-router@^2.0.1:
   version "2.8.1"
