@@ -65,8 +65,8 @@ export function addAndHandleReply (duckId, reply) {
   }
 }
 
-export function fetchAndHandleReplies (duckId) {
-  return function (dispatch, getState) {
+export const fetchAndHandleReplies = (duckId) => {
+  return (dispatch, getState) => {
     dispatch(fetchingReplies())
 
     fetchReplies(duckId)
