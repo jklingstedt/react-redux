@@ -23,7 +23,11 @@ const Modal = (props) => {
   return (
     <span className={darkBtn} onClick={props.openModal}>
       {'Duck'}
-      <ReactModal style={modalStyles} isOpen={props.isOpen} onRequestClose={props.closeModal} contentLabel='fix'>
+      <ReactModal
+        style={modalStyles}
+        isOpen={props.isOpen}
+        onRequestClose={props.closeModal}
+        contentLabel='fix' >
         <div className={newDuckTop}>
           <span>{'Compose new Duck'}</span>
           <span onClick={props.closeModal} className={pointer}>{'X'}</span>
